@@ -55,5 +55,7 @@ public class SeedKi15d extends GhidraScript {
         seedCode("88012614", "wait_vblank_cycle", true, false);
         seedCode("8802aa24", "main_controller", true, true);
         seedCode("8802ae14", "main_loop_head", false, false);
+        seedCode("8802d5b0", "checksum_mix_step", true, false);
+        seedCode("8802d5e0", "checksum_mix_step_x3", true, false);
     }
 }

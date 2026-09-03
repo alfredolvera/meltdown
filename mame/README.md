@@ -18,7 +18,26 @@ main CPU after waiting ten emulated seconds.
 block recurs as the main coordinator before a name is added to its provenance
 record.
 
-Dumps, traces, and disassembly never enter Git.
+`oracle_ki15d_8802d5b0.cmd` loads the verified extracted segment and executes
+the original routine at `0x8802d5b0` with controlled inputs. Run it from the
+repository root with MAME's dynamic recompiler disabled:
+
+```sh
+flatpak run org.mamedev.MAME kinst \
+  -rompath assets/ki1 \
+  -debug -nodrc \
+  -debugscript mame/oracle_ki15d_8802d5b0.cmd \
+  -video none -sound none -nothrottle -skip_gameinfo -seconds_to_run 3 \
+  -cfg_directory work/mame/cfg -diff_directory work/mame/diff
+```
+
+The compact input/output results are tracked in
+`tests/fixtures/ki15d_8802d5b0.csv`; the instruction trace remains under
+`work/` and is never committed.
+
+Memory dumps, traces, and full generated disassemblies never enter Git. Small
+per-function assembly excerpts may be tracked when they are required for
+provenance and do not contain game assets.
 
 Although MAME's map displays physical ranges, `save` and `dasm` accept R4600
 virtual addresses. These scripts use KSEG0/KSEG1 for RAM and `0xbfc00000` for

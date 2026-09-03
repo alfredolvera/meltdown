@@ -23,8 +23,10 @@ and explicit replacements for arcade hardware and host-platform services.
 - The provisional main controller at `0x8802aa24` and recurring loop head at
   `0x8802ae14` have provenance records and seeded Ghidra labels.
 - A minimal R4600 memory model runs in the native PC test harness.
-- Next milestone: select a small, bounded original routine and execute it
-  natively against fixtures captured from MAME.
+- The original routine at `0x8802d5b0` now executes natively on PC and matches
+  seven controlled 64-bit input/output cases produced by its R4600 code in MAME.
+- Next milestone: recover a bounded routine with explicit RAM input and output,
+  then verify its complete modified-memory range.
 
 ## Game data
 
@@ -72,7 +74,7 @@ mame/                   Debugger capture and tracing scripts
 native/                 Native PC runtime and tests
 provenance/             One JSON record per recovered original function
 tools/                  Inventory, comparison, and validation utilities
-work/                   Local captures and analysis always ignored by Git
+work/                   Local captures and analysis; always ignored by Git
 ```
 
 ## Disclaimer

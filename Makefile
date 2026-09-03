@@ -13,6 +13,8 @@ test-native:
 	mkdir -p native/build
 	$(CC) $(CFLAGS) -Inative/include native/src/memory.c native/tests/test_memory.c -o native/build/test_memory
 	./native/build/test_memory
+	$(CC) $(CFLAGS) -Inative/include native/src/original/ki15d_8802d5b0.c native/tests/test_ki15d_8802d5b0.c -o native/build/test_ki15d_8802d5b0
+	./native/build/test_ki15d_8802d5b0
 
 provenance-check:
 	$(PYTHON) tools/ki_project.py provenance-check provenance/functions
@@ -22,4 +24,3 @@ doctor:
 
 clean:
 	rm -rf native/build
-
