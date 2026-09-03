@@ -10,6 +10,11 @@ typedef enum KiMemoryResult {
     KI_MEMORY_READ_ONLY = 2
 } KiMemoryResult;
 
+/*
+ * Host pointers backing the memory regions currently understood by Meltdown.
+ * All public accessors accept original R4600 virtual addresses and translate
+ * their direct-mapped KSEG aliases before selecting one of these regions.
+ */
 typedef struct KiMemory {
     uint8_t *low_ram;
     size_t low_ram_size;
@@ -19,6 +24,7 @@ typedef struct KiMemory {
     size_t boot_rom_size;
 } KiMemory;
 
+/* Convert 32-bit KSEG0/KSEG1 aliases to the arcade's physical address. */
 uint32_t ki_physical_address(uint64_t virtual_address);
 
 KiMemoryResult ki_memory_read_u8(const KiMemory *memory, uint64_t address,
@@ -35,4 +41,3 @@ KiMemoryResult ki_memory_write_u32_le(KiMemory *memory, uint64_t address,
                                       uint32_t value);
 
 #endif
-

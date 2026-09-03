@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 enum {
+    /* Physical regions exposed by the current Killer Instinct memory map. */
     KI_LOW_RAM_BASE = 0x00000000u,
     KI_MAIN_RAM_BASE = 0x08000000u,
     KI_BOOT_ROM_BASE = 0x1fc00000u
@@ -15,6 +16,7 @@ static bool range_fits(uint32_t address, uint32_t base, size_t region_size,
         return false;
     }
 
+    /* Subtract only after the lower-bound check and avoid addition overflow. */
     const uint64_t candidate = (uint64_t)address - base;
     if (candidate > region_size || access_size > region_size - (size_t)candidate) {
         return false;
@@ -27,6 +29,8 @@ static bool range_fits(uint32_t address, uint32_t base, size_t region_size,
 uint32_t ki_physical_address(uint64_t virtual_address)
 {
     const uint32_t address = (uint32_t)virtual_address;
+
+    /* KSEG0 and KSEG1 are cached/uncached aliases of the same physical range. */
     if (address >= 0x80000000u && address <= 0xbfffffffu) {
         return address & 0x1fffffffu;
     }
@@ -39,6 +43,7 @@ static KiMemoryResult read_pointer(const KiMemory *memory, uint64_t address,
     const uint32_t physical = ki_physical_address(address);
     size_t offset = 0;
 
+    /* Test regions in map order; range_fits also validates the full access. */
     if (range_fits(physical, KI_LOW_RAM_BASE, memory->low_ram_size, size, &offset)) {
         *pointer = memory->low_ram + offset;
         return KI_MEMORY_OK;
@@ -69,6 +74,7 @@ static KiMemoryResult write_pointer(KiMemory *memory, uint64_t address,
         return KI_MEMORY_OK;
     }
     if (range_fits(physical, KI_BOOT_ROM_BASE, memory->boot_rom_size, size, &offset)) {
+        /* A valid ROM address is distinct from an unmapped write. */
         return KI_MEMORY_READ_ONLY;
     }
     return KI_MEMORY_UNMAPPED;
@@ -144,4 +150,3 @@ KiMemoryResult ki_memory_write_u32_le(KiMemory *memory, uint64_t address,
     }
     return result;
 }
-

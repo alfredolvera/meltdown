@@ -9,6 +9,11 @@ enum { LINE_CAPACITY = 160 };
 
 int main(void)
 {
+    /*
+     * Keep the MAME-produced values outside the test executable. This makes
+     * the CSV the single auditable fixture shared by the native test and the
+     * per-function provenance record.
+     */
     const char *fixture_path = "tests/fixtures/ki15d_8802d5b0.csv";
     FILE *fixture = fopen(fixture_path, "r");
     if (fixture == NULL) {
@@ -21,6 +26,8 @@ int main(void)
     unsigned int cases_checked = 0;
     while (fgets(line, sizeof(line), fixture) != NULL) {
         line_number++;
+
+        /* Allow the fixture to explain its origin and retain a column header. */
         if (line[0] == '#' || line[0] == '\n' ||
             strncmp(line, "input_hex,", 10) == 0) {
             continue;
@@ -36,6 +43,8 @@ int main(void)
         }
 
         const uint64_t actual = ki15d_8802d5b0(input);
+
+        /* Stop at the first mismatch so the offending input is unambiguous. */
         if (actual != expected) {
             fprintf(stderr,
                     "%s:%u: input=%016" PRIx64 " expected=%016" PRIx64

@@ -77,6 +77,15 @@ tools/                  Inventory, comparison, and validation utilities
 work/                   Local captures and analysis; always ignored by Git
 ```
 
+## Readability and auditability
+
+Native reconstructions favor clear, reviewable code over clever shortcuts.
+Each recovered routine lives in an address-named file, non-obvious MIPS
+semantics are explained next to the implementation, and tests point to the
+same fixtures recorded in provenance. Comments should explain intent,
+assumptions, hardware behavior, and fidelity-sensitive details rather than
+repeat what an individual statement already says.
+
 ## Disclaimer
 
 Meltdown is an unofficial, non-commercial research project. It is not affiliated
