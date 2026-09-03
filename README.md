@@ -57,26 +57,22 @@ python3 tools/ki_project.py new-function \
 
 ## Documentation
 
-1. [Project charter](docs/PROJECT_CHARTER.md)
-2. [Proof-of-concept roadmap](docs/ROADMAP.md)
-3. [Initial hardware map](docs/HARDWARE_BASELINE.md)
-4. [Verification method](docs/VERIFICATION.md)
-5. [Ghidra project](docs/GHIDRA.md)
-6. [External references](docs/EXTERNAL_REFERENCES.md)
-7. [Decision log](docs/DECISIONS.md)
-8. [Work log](docs/WORKLOG.md)
+1. [Initial hardware map](docs/HARDWARE_BASELINE.md)
+2. [Verification method](docs/VERIFICATION.md)
+3. [Ghidra project](docs/GHIDRA.md)
+4. [External references](docs/EXTERNAL_REFERENCES.md)
 
 ## Repository layout
 
 ```text
 config/                 Public fingerprints and revision configuration
-docs/                   Scope, technical notes, decisions, and work log
+docs/                   Technical notes and external references
 ghidra_scripts/         Reproducible labels and analysis setup
 mame/                   Debugger capture and tracing scripts
 native/                 Native PC runtime and tests
 provenance/             One JSON record per recovered original function
 tools/                  Inventory, comparison, and validation utilities
-work/                   Local captures and analysis; always ignored by Git
+work/                   Local captures and analysis always ignored by Git
 ```
 
 ## Disclaimer
