@@ -35,6 +35,11 @@ difference and retains a compact diff. A similar final image is not sufficient:
 two implementations can look identical while differing in RNG, timing,
 overflow, or internal state.
 
+When a routine writes RAM, the native test constructs the full expected memory
+image from the MAME fixture and compares every byte in the mapped test region.
+This catches accidental writes outside the known destination as well as wrong
+values inside it.
+
 ## Rule for new code
 
 A hardware replacement is verified against MAME's observable behavior but is

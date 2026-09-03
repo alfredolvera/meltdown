@@ -52,6 +52,7 @@ public class SeedKi15d extends GhidraScript {
         seedCode("88000000", "loaded_vector", false, true);
         seedCode("880001b8", "loaded_entry", true, true);
         seedCode("8800034c", "jump_to_main_controller", false, false);
+        seedCode("8800700c", "copy_record_fields", true, false);
         seedCode("88012614", "wait_vblank_cycle", true, false);
         seedCode("8802aa24", "main_controller", true, true);
         seedCode("8802ae14", "main_loop_head", false, false);

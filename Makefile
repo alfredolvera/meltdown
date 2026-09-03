@@ -15,6 +15,8 @@ test-native:
 	./native/build/test_memory
 	$(CC) $(CFLAGS) -Inative/include native/src/original/ki15d_8802d5b0.c native/tests/test_ki15d_8802d5b0.c -o native/build/test_ki15d_8802d5b0
 	./native/build/test_ki15d_8802d5b0
+	$(CC) $(CFLAGS) -Inative/include native/src/memory.c native/src/original/ki15d_8800700c.c native/tests/test_ki15d_8800700c.c -o native/build/test_ki15d_8800700c
+	./native/build/test_ki15d_8800700c
 
 provenance-check:
 	$(PYTHON) tools/ki_project.py provenance-check provenance/functions

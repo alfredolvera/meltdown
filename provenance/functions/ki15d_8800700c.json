@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "id": "ki15d_8800700c",
+  "name": "copy_record_fields",
+  "game": {
+    "mame_set": "kinst",
+    "revision": "v1.5d",
+    "input_manifest": "work/input-inventory.json"
+  },
+  "original": {
+    "cpu": "R4600LE",
+    "virtual_address": "0x8800700c",
+    "physical_address": "0x0800700c",
+    "file_offset": null,
+    "source_image": "ki-l15d.u98",
+    "extracted_segment": {
+      "index": 0,
+      "load_address": "0x08000000",
+      "segment_offset": "0x0000700c",
+      "segment_size": 208048,
+      "segment_sha256": "5dd923067b1a3398d4d26b6558e46cf396ab69b66afd5f8b183885b820e79b79",
+      "function_size": 32,
+      "function_sha256": "7cd0d60b499a853c4037bb3cce0b93fc78feaef51f042d7d8b8524e9dc753833"
+    },
+    "assembly_path": "provenance/asm/ki15d_8800700c.s",
+    "calling_convention": {
+      "destination": "$a2",
+      "source": "$s5",
+      "first_byte": "$a3 low byte",
+      "return": "No semantic return value"
+    },
+    "memory_access": {
+      "reads": ["source + 4..15"],
+      "writes": ["destination + 0", "destination + 4..15"]
+    },
+    "discovery_notes": "A leaf routine called from at least 0x88002bb4, 0x88007cfc, and 0x88008010. copy_record_fields is provisional until a caller identifies the record's game-level meaning."
+  },
+  "reconstruction": {
+    "kind": "static-recompilation",
+    "status": "implemented",
+    "source_path": "native/src/original/ki15d_8800700c.c",
+    "hardware_dependencies": []
+  },
+  "verification": {
+    "status": "trace-matched",
+    "fixtures": [
+      "tests/fixtures/ki15d_8800700c.csv",
+      "work/mame/traces/oracle-ki15d-8800700c.trace",
+      "work/kipack/ki15d/rom-0.bin"
+    ],
+    "mame_version": "0.289",
+    "commands": [
+      "flatpak run org.mamedev.MAME kinst -rompath assets/ki1 -debug -nodrc -debugscript mame/oracle_ki15d_8800700c.cmd -video none -sound none -nothrottle -skip_gameinfo -seconds_to_run 3 -cfg_directory work/mame/cfg -diff_directory work/mame/diff",
+      "make check"
+    ],
+    "notes": "Three controlled calls were executed by the original R4600 instructions in MAME. The native test reproduces each output, confirms the 16-byte source is unchanged, and compares the full 1 MiB mapped test RAM byte-for-byte to prove that no unexpected location was modified."
+  }
+}

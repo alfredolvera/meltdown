@@ -35,6 +35,11 @@ The compact input/output results are tracked in
 `tests/fixtures/ki15d_8802d5b0.csv`; the instruction trace remains under
 `work/` and is never committed.
 
+`oracle_ki15d_8800700c.cmd` applies the same method to a small RAM-writing leaf
+routine. It records the source and destination before and after three controlled
+calls. Its compact results live in `tests/fixtures/ki15d_8800700c.csv`; the
+native test uses them to build and compare the complete expected RAM image.
+
 Memory dumps, traces, and full generated disassemblies never enter Git. Small
 per-function assembly excerpts may be tracked when they are required for
 provenance and do not contain game assets.

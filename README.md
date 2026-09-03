@@ -25,8 +25,11 @@ and explicit replacements for arcade hardware and host-platform services.
 - A minimal R4600 memory model runs in the native PC test harness.
 - The original routine at `0x8802d5b0` now executes natively on PC and matches
   seven controlled 64-bit input/output cases produced by its R4600 code in MAME.
-- Next milestone: recover a bounded routine with explicit RAM input and output,
-  then verify its complete modified-memory range.
+- The original record-copy routine at `0x8800700c` now runs through that memory
+  model. Three controlled MAME cases match, including a byte-for-byte comparison
+  of the full 1 MiB native test RAM after each call.
+- Next milestone: recover a caller that gives these small leaf routines enough
+  surrounding context to identify their game-level purpose.
 
 ## Game data
 
