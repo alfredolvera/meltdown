@@ -1,9 +1,3 @@
-error: Loading sysroot: Connecting to system bus: Could not connect: Operation not permitted
-
-(process:46): dconf-CRITICAL **: 06:10:52.753: unable to create file '/run/user/1000/dconf/user': Read-only file system.  dconf will not work properly.
-
-(process:46): dconf-CRITICAL **: 06:10:52.753: unable to create file '/run/user/1000/dconf/user': Read-only file system.  dconf will not work properly.
-error: Loading sysroot: Connecting to system bus: Could not connect: Operation not permitted
 # Meltdown
 
 Meltdown is a research and learning project exploring native recompilation of
